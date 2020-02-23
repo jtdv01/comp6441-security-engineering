@@ -172,3 +172,86 @@ bandit4@bandit:~/inhere$ cat ./*
                  XS
 
 ```
+
+# Level 05->06
+
+Level Goal
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
+human-readable
+1033 bytes in size
+not executable
+
+## Login
+```sh
+ssh -l bandit5 bandit.labs.overthewire.org -p 2220
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+```
+
+```sh
+find . -size 1033c -perm /222 -exec cat {} \;
+
+or
+find . -size 1033c -perm /u-x -exec cat {} \;
+```
+
+# Level 06-07
+https://overthewire.org/wargames/bandit/bandit7.html
+The password for the next level is stored somewhere on the server and has all of the following properties:
+
+owned by user bandit7
+owned by group bandit6
+33 bytes in size
+
+## Login
+```sh
+ssh -l bandit6 bandit.labs.overthewire.org -p 2220
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+```
+
+```sh
+find / -size 33c -group bandit6 -user bandit7 | grep -v denied
+cat /var/lib/dpkg/info/bandit7.password
+```
+
+# Level 07-08
+## Login
+```sh
+ssh -l bandit7 bandit.labs.overthewire.org -p 2220
+HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+```
+
+The password for the next level is stored in the file data.txt next to the word millionth
+
+```
+cat data.txt | grep millionth
+cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+```
+
+# Level 08->09
+
+## Login
+```sh
+ssh -l bandit8 bandit.labs.overthewire.org -p 2220
+cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+```
+
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+
+```sh
+cat data.txt | sort | uniq -c 
+```
+
+# Level 09->10
+https://overthewire.org/wargames/bandit/bandit10.html
+## Login
+```sh
+ssh -l bandit9 bandit.labs.overthewire.org -p 2220
+UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+```
+
+```
+grep "==" data.txt -a
+truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+```
+
